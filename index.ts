@@ -91,7 +91,7 @@ class Scheduler {
             }
             
             time++;
-        } while ((this.newQueue.length != 0 || this.readyQueue.length != 0 || this.waitingQueue.length != 0) || this.currentProcess?.Tasks.length > 0);
+        } while (this.newQueue.length != 0 || this.readyQueue.length != 0 || this.waitingQueue.length != 0 || this.currentProcess?.Tasks.length > 0);
     }
 }
 
