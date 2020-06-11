@@ -40,7 +40,7 @@ class Scheduler {
     constructor(Processes: Process[]) {
         let temp = Processes.sort((a, b) => a.ArriveTime - b.ArriveTime);
 
-        for (const x of Processes) {
+        for (const x of temp) {
             if (x.ArriveTime == 0) this.readyQueue.push(x);
             else this.newQueue.push(x);
         }
@@ -121,4 +121,4 @@ s.FCFS();
 
 
 
-/// Can fix loi ham push cua queue de khi push vo luon o trang thai da sap xep
+/// Can fix loi ham push cua waiting queue de khi push vo luon o trang thai da sap xep

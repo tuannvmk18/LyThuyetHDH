@@ -20,8 +20,8 @@ var Scheduler = /** @class */ (function () {
         this.waitingQueue = [];
         this.IOTask = [];
         var temp = Processes.sort(function (a, b) { return a.ArriveTime - b.ArriveTime; });
-        for (var _i = 0, Processes_1 = Processes; _i < Processes_1.length; _i++) {
-            var x = Processes_1[_i];
+        for (var _i = 0, temp_1 = temp; _i < temp_1.length; _i++) {
+            var x = temp_1[_i];
             if (x.ArriveTime == 0)
                 this.readyQueue.push(x);
             else
