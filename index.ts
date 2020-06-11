@@ -120,5 +120,4 @@ let s = new Scheduler([p, p2]);
 s.FCFS();
 
 
-
-/// Can fix loi ham push cua waiting queue de khi push vo luon o trang thai da sap xep
+///To do: Can fix loi ham push cua waiting queue de khi push vo luon o trang thai da sap xep
