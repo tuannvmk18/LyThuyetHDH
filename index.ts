@@ -48,10 +48,7 @@ class Scheduler {
 
     FCFS(): void {
         let time = 0;
-
         do {
-            console.log(time);
-            console.log(this.currentProcess?.ID + ' : ' + this.currentProcess);
             while (this.newQueue[0]?.ArriveTime == time) {
                 this.readyQueue.push(this.newQueue.shift());
             }
@@ -95,29 +92,14 @@ class Scheduler {
     }
 }
 
-let task1: Task = {
-    Duration: 10,
-    Type: 'CPU'
-}
 
-let task2: Task = {
-    Duration: 10,
-    Type: 'IO'
-}
+let tasks: Task[] = [{Duration: 2, Type: 'CPU'}, {Duration: 10, Type: 'IO'}, {Duration: 7, Type: "CPU"}];
+let tasks2: Task[] = [{Duration: 5, Type: 'CPU'}, {Duration: 3, Type: 'IO'}, {Duration: 4, Type: "CPU"}];
 
-let task3: Task = {
-    Duration: 10,
-    Type: 'CPU'
-}
-
-let tasks: Task[] = [task1, task2, task3];
-let tasks2: Task[] = [{Duration: 10, Type: 'CPU'}, {Duration: 20, Type: 'IO'}, {Duration: 4, Type: "CPU"}];
-
-let p = new Process('P1', 0, tasks);
+let p = new Process('P1', 1, tasks);
 let p2 = new Process('P2', 0, tasks2);
 let s = new Scheduler([p, p2]);
 // console.log(s);
 s.FCFS();
 
 
-///To do: Can fix loi ham push cua waiting queue de khi push vo luon o trang thai da sap xep
