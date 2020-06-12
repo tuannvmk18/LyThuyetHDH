@@ -67,11 +67,12 @@ var Scheduler = /** @class */ (function () {
                 this.currentProcess.ArriveTime = time + this.currentProcess.Tasks[0].Duration;
                 this.currentProcess.Tasks.shift();
                 this.waitingQueue.push(this.currentProcess);
+                this.waitingQueue.sort(function (a, b) { return a.ArriveTime - b.ArriveTime; });
                 this.currentProcess = undefined;
                 continue;
             }
             time++;
-        } while ((this.newQueue.length != 0 || this.readyQueue.length != 0 || this.waitingQueue.length != 0) || ((_k = this.currentProcess) === null || _k === void 0 ? void 0 : _k.Tasks.length) > 0);
+        } while (this.newQueue.length != 0 || this.readyQueue.length != 0 || this.waitingQueue.length != 0 || ((_k = this.currentProcess) === null || _k === void 0 ? void 0 : _k.Tasks.length) > 0);
     };
     return Scheduler;
 }());
@@ -94,4 +95,4 @@ var p2 = new Process('P2', 0, tasks2);
 var s = new Scheduler([p, p2]);
 // console.log(s);
 s.FCFS();
-/// Can fix loi ham push cua queue de khi push vo luon o trang thai da sap xep
+///To do: Can fix loi ham push cua waiting queue de khi push vo luon o trang thai da sap xep

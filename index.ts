@@ -86,10 +86,10 @@ class Scheduler {
                 this.currentProcess.ArriveTime = time + this.currentProcess.Tasks[0].Duration;
                 this.currentProcess.Tasks.shift();
                 this.waitingQueue.push(this.currentProcess);
+                this.waitingQueue.sort((a, b) => a.ArriveTime - b.ArriveTime);
                 this.currentProcess = undefined;
                 continue;
             }
-            
             time++;
         } while (this.newQueue.length != 0 || this.readyQueue.length != 0 || this.waitingQueue.length != 0 || this.currentProcess?.Tasks.length > 0);
     }
