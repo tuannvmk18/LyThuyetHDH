@@ -37,17 +37,34 @@ class Scheduler {
 
     currentProcess: Process | undefined;
 
-    constructor(Processes: Process[]) {
-        let temp = Processes.sort((a, b) => a.ArriveTime - b.ArriveTime);
+    constructor() {
+        
+    }
 
+    initialize(Processes: Process[]): void {
+        let temp = Processes.sort((a, b) => a.ArriveTime - b.ArriveTime);
         for (const x of temp) {
             if (x.ArriveTime == 0) this.readyQueue.push(x);
             else this.newQueue.push(x);
         }
     }
 
-    FCFS(): void {
-        let time = 0;
+    FCFS(Processes: Process[]): any {
+
+        let ahihi: [][] | any = [];
+
+
+        for(let i = 0; i < Processes.length; i++) {
+            for(let j = 0; j < Processes[i].Tasks.length + 1; j++) {
+                ahihi[i + j] = [];
+            }
+        }
+
+
+        this.initialize(Processes);
+        let time: number = 0;
+        let count = 0;
+
         do {
             while (this.newQueue[0]?.ArriveTime == time) {
                 this.readyQueue.push(this.newQueue.shift());
@@ -60,15 +77,25 @@ class Scheduler {
             if (this.currentProcess == undefined) {
                 if (this.readyQueue.length != 0) {
                     this.currentProcess = this.readyQueue.shift();
+                    ahihi[count]?.push(this.currentProcess.ID);
+                    ahihi[count]?.push(time);
                 }
             } else {
                 if (this.currentProcess?.Tasks[0]?.Duration > 0) {
                     this.currentProcess.Tasks[0].Duration--;
                 }
-                if (this.currentProcess?.Tasks[0]?.Duration == 0) this.currentProcess.Tasks.shift();
+                if (this.currentProcess?.Tasks[0]?.Duration == 0) {
+                    this.currentProcess.Tasks.shift();
+                    ahihi[count]?.push(time);
+                    count++;
+                }
+
                 if (this.currentProcess.Tasks.length == 0) {
                     this.currentProcess = undefined;
-                    this.currentProcess = this.readyQueue.shift();
+                    // this.currentProcess = this.readyQueue.shift();
+                    // ahihi[count]?.push(this.currentProcess?.ID);
+                    // ahihi[count]?.push(time);
+                    continue;
                 }
             }
 
@@ -89,17 +116,29 @@ class Scheduler {
             }
             time++;
         } while (this.newQueue.length != 0 || this.readyQueue.length != 0 || this.waitingQueue.length != 0 || this.currentProcess?.Tasks.length > 0);
+        
+
+        ahihi.sort((a, b) => {
+            if(a[0] < b[0])
+                return -1;
+            else if(a[0] > b[0]) return 1;
+            return 0;
+        });
+        console.log(ahihi);
+        return ahihi;
     }
 }
 
 
-let tasks: Task[] = [{Duration: 2, Type: 'CPU'}, {Duration: 10, Type: 'IO'}, {Duration: 7, Type: "CPU"}];
-let tasks2: Task[] = [{Duration: 5, Type: 'CPU'}, {Duration: 3, Type: 'IO'}, {Duration: 4, Type: "CPU"}];
+let tasks: Task[] = [{ Duration: 2, Type: 'CPU' }, { Duration: 10, Type: 'IO' }, { Duration: 7, Type: "CPU" }];
+let tasks2: Task[] = [{ Duration: 5, Type: 'CPU' }, { Duration: 3, Type: 'IO' }, { Duration: 4, Type: "CPU" }];
+let tasks3: Task[] = [{ Duration: 9, Type: 'CPU' }, { Duration: 7, Type: 'IO' }, { Duration: 8, Type: "CPU" }];
 
 let p = new Process('P1', 1, tasks);
 let p2 = new Process('P2', 0, tasks2);
-let s = new Scheduler([p, p2]);
+let p3 = new Process('P3', 0, tasks3);
+let s = new Scheduler();
 // console.log(s);
-s.FCFS();
+s.FCFS([p, p2, p3]);
 
 
