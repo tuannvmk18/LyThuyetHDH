@@ -122,7 +122,10 @@ class Scheduler {
             return 0;
         });
         ahihi = ahihi.filter(x => x.length != 0);
-
+        ahihi.forEach((x) => {
+            x[1] *= 1000;
+            x[2] *= 1000; 
+        });
         return ahihi;
     }
 
@@ -206,7 +209,10 @@ class Scheduler {
         });
         
         ahihi = ahihi.filter(x => x.length != 0);
-        
+        ahihi.forEach((x) => {
+            x[1] *= 1000;
+            x[2] *= 1000; 
+        });
         return ahihi;
     }
 
@@ -298,7 +304,10 @@ class Scheduler {
         });
         
         ahihi = ahihi.filter(x => x.length != 0);
-        console.log(ahihi);
+        ahihi.forEach((x) => {
+            x[1] *= 1000;
+            x[2] *= 1000; 
+        });
         return ahihi;
     }
 }
@@ -314,6 +323,6 @@ let p3 = new Process('P3', 2, tasks3);
 let p4 = new Process('P4', 3, tasks4);
 let s = new Scheduler();
 // console.log(s);
-s.FCFS([p, p2, p3, p4]);
+s.SRTF([p, p2, p3, p4]);
 
 

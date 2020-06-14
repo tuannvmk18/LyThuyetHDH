@@ -92,7 +92,10 @@ class Scheduler {
             return 0;
         });
         ahihi = ahihi.filter(x => x.length != 0);
-        console.log(ahihi);
+        ahihi.forEach((x) => {
+            x[1] *= 1000;
+            x[2] *= 1000;
+        });
         return ahihi;
     }
     SJF(Processes) {
@@ -163,6 +166,10 @@ class Scheduler {
             return 0;
         });
         ahihi = ahihi.filter(x => x.length != 0);
+        ahihi.forEach((x) => {
+            x[1] *= 1000;
+            x[2] *= 1000;
+        });
         return ahihi;
     }
     SRTF(Processes) {
@@ -241,8 +248,22 @@ class Scheduler {
             return 0;
         });
         ahihi = ahihi.filter(x => x.length != 0);
+        ahihi.forEach((x) => {
+            x[1] *= 1000;
+            x[2] *= 1000;
+        });
         console.log(ahihi);
         return ahihi;
     }
 }
-
+let tasks = [{ Duration: 8, Type: 'CPU' }];
+let tasks2 = [{ Duration: 4, Type: 'CPU' }];
+let tasks3 = [{ Duration: 9, Type: 'CPU' }];
+let tasks4 = [{ Duration: 5, Type: 'CPU' }];
+let p = new Process('P1', 0, tasks);
+let p2 = new Process('P2', 1, tasks2);
+let p3 = new Process('P3', 2, tasks3);
+let p4 = new Process('P4', 3, tasks4);
+let s = new Scheduler();
+// console.log(s);
+s.SRTF([p, p2, p3, p4]);

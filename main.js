@@ -26,9 +26,11 @@ let draw = function (ahihi) {
         var options = {
             timeline: {
                 groupByRowLabel: true,
+                timeline: { colorByRowLabel: true, showRowLabels: true },
                 animation: {
                     "startup": true
-                }
+                },
+                avoidOverlappingGridLines: false
             }
         };
         chart.draw(dataTable, options);
@@ -129,6 +131,10 @@ class Scheduler {
             return 0;
         });
         ahihi = ahihi.filter(x => x.length != 0);
+        ahihi.forEach((x) => {
+            x[1] *= 1000;
+            x[2] *= 1000; 
+        });
         console.log(ahihi);
         draw(ahihi);
         return ahihi;
@@ -200,6 +206,10 @@ class Scheduler {
             return 0;
         });
         ahihi = ahihi.filter(x => x.length != 0);
+        ahihi.forEach((x) => {
+            x[1] *= 1000;
+            x[2] *= 1000; 
+        });
         console.log(ahihi);
         draw(ahihi);
         return ahihi;
@@ -279,6 +289,10 @@ class Scheduler {
             return 0;
         });
         ahihi = ahihi.filter(x => x.length != 0);
+        ahihi.forEach((x) => {
+            x[1] *= 1000;
+            x[2] *= 1000; 
+        });
         draw(ahihi);
         console.log(ahihi);
         return ahihi;
