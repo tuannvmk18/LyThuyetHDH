@@ -1,0 +1,25 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+</head>
+
+<body>
+    <div id="timeline" style="height: 100%;"></div>
+
+    <script src="main.js"></script>
+    <script>
+        
+        var p = new Process('P1', 0, [{ Duration: 8, Type: 'CPU'}]);
+        var p2 = new Process('P2', 1, [{ Duration: 4, Type: 'CPU'}]);
+        var p3 = new Process('P3', 2, [{Duration: 9,Type: 'CPU'}]);
+        var p4 = new Process('P4', 3, [{Duration: 5,Type: 'CPU'}]);
+        var s = new Scheduler();
+        s.SJF([p, p2, p3, p4]);
+    </script>
+</body>
+
+</html>

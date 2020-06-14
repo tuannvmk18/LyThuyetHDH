@@ -38,32 +38,32 @@ class Scheduler {
     currentProcess: Process | undefined;
 
     constructor() {
-        
+
     }
 
     initialize(Processes: Process[]): void {
         let temp = Processes.sort((a, b) => a.ArriveTime - b.ArriveTime);
         for (const x of temp) {
-            if (x.ArriveTime == 0) this.readyQueue.push(x);
-            else this.newQueue.push(x);
+            if (x.ArriveTime == 0) this.readyQueue.push(Object.assign(x));
+            else this.newQueue.push(Object.assign(x));
         }
     }
 
     FCFS(Processes: Process[]): any {
 
         let ahihi: [][] | any = [];
+        let count = 0;
 
-
-        for(let i = 0; i < Processes.length; i++) {
-            for(let j = 0; j < Processes[i].Tasks.length + 1; j++) {
-                ahihi[i + j] = [];
+        for (let i = 0; i < Processes.length; i++) {
+            for (let j = 0; j < Processes[i].Tasks.length + 1; j++) {
+                ahihi[count++] = [];
             }
         }
-
+        count = 0;
 
         this.initialize(Processes);
         let time: number = 0;
-        let count = 0;
+        
 
         do {
             while (this.newQueue[0]?.ArriveTime == time) {
@@ -116,12 +116,12 @@ class Scheduler {
             }
             time++;
         } while (this.newQueue.length != 0 || this.readyQueue.length != 0 || this.waitingQueue.length != 0 || this.currentProcess?.Tasks.length > 0);
-        
+
 
         ahihi.sort((a, b) => {
-            if(a[0] < b[0])
+            if (a[0] < b[0])
                 return -1;
-            else if(a[0] > b[0]) return 1;
+            else if (a[0] > b[0]) return 1;
             return 0;
         });
         console.log(ahihi);
@@ -131,19 +131,20 @@ class Scheduler {
     SJF(Processes: Process[]): any {
 
         let ahihi: [][] | any = [];
+        let count = 0;
 
-
-        for(let i = 0; i < Processes.length; i++) {
-            for(let j = 0; j < Processes[i].Tasks.length + 1; j++) {
-                ahihi[i + j] = [];
+        for (let i = 0; i < Processes.length; i++) {
+            for (let j = 0; j < Processes[i].Tasks.length + 1; j++) {
+                ahihi[count++] = [];
             }
         }
+        
 
 
         this.initialize(Processes);
         let time: number = 0;
-        let count = 0;
-
+        count = 0;
+        
         do {
             while (this.newQueue[0]?.ArriveTime == time) {
                 this.readyQueue.push(this.newQueue.shift());
@@ -153,11 +154,10 @@ class Scheduler {
                 this.readyQueue.push(this.waitingQueue.shift());
             }
 
-            if(this.currentProcess?.Tasks[0].Type == 'CPU') {
-                this.readyQueue.sort((a, b) => {
-                    return a.Tasks[0].Duration - b.Tasks[0].Duration;
-                });
-            }
+            this.readyQueue.sort((a, b) => {
+                return a?.Tasks[0].Duration - b?.Tasks[0].Duration;
+            });
+
 
             if (this.currentProcess == undefined) {
                 if (this.readyQueue.length != 0) {
@@ -201,12 +201,12 @@ class Scheduler {
             }
             time++;
         } while (this.newQueue.length != 0 || this.readyQueue.length != 0 || this.waitingQueue.length != 0 || this.currentProcess?.Tasks.length > 0);
-        
+
 
         ahihi.sort((a, b) => {
-            if(a[0] < b[0])
+            if (a[0] < b[0])
                 return -1;
-            else if(a[0] > b[0]) return 1;
+            else if (a[0] > b[0]) return 1;
             return 0;
         });
         console.log(ahihi);

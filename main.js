@@ -1,3 +1,42 @@
+let draw = function (ahihi) {
+    google.charts.load('current', {
+        'packages': ['timeline']
+    });
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+        var container = document.getElementById('timeline');
+        var chart = new google.visualization.Timeline(container);
+        var dataTable = new google.visualization.DataTable();
+
+        dataTable.addColumn({
+            type: 'string',
+            id: 'ID'
+        });
+        dataTable.addColumn({
+            type: 'number',
+            id: 'Start'
+        });
+        dataTable.addColumn({
+            type: 'number',
+            id: 'End'
+        });
+        dataTable.addRows(ahihi);
+
+        var options = {
+            timeline: {
+                groupByRowLabel: true,
+                animation: {
+                    "startup": true
+                }
+            }
+        };
+
+        chart.draw(dataTable, options);
+    }
+}
+
+
 class Process {
     constructor(ID, ArriveTime, Tasks) {
         if (ArriveTime < 0)
@@ -94,7 +133,9 @@ class Scheduler {
                 return 1;
             return 0;
         });
+        ahihi = ahihi.filter((x) => x.length != 0);
         console.log(ahihi);
+        draw(ahihi);
         return ahihi;
     }
     SJF(Processes) {
@@ -167,16 +208,10 @@ class Scheduler {
                 return 1;
             return 0;
         });
+        
+        ahihi = ahihi.filter((x) => x.length != 0);
         console.log(ahihi);
+        draw(ahihi);
         return ahihi;
     }
 }
-let tasks = [{ Duration: 2, Type: 'CPU' }, { Duration: 10, Type: 'IO' }, { Duration: 7, Type: "CPU" }];
-let tasks2 = [{ Duration: 5, Type: 'CPU' }, { Duration: 3, Type: 'IO' }, { Duration: 4, Type: "CPU" }];
-let tasks3 = [{ Duration: 9, Type: 'CPU' }, { Duration: 7, Type: 'IO' }, { Duration: 8, Type: "CPU" }];
-let p = new Process('P1', 1, tasks);
-let p2 = new Process('P2', 0, tasks2);
-let p3 = new Process('P3', 0, tasks3);
-let s = new Scheduler();
-// console.log(s);
-s.SJF([p, p2, p3]);
