@@ -92,9 +92,6 @@ class Scheduler {
 
                 if (this.currentProcess.Tasks.length == 0) {
                     this.currentProcess = undefined;
-                    // this.currentProcess = this.readyQueue.shift();
-                    // ahihi[count]?.push(this.currentProcess?.ID);
-                    // ahihi[count]?.push(time);
                     continue;
                 }
             }
@@ -178,9 +175,6 @@ class Scheduler {
 
                 if (this.currentProcess.Tasks.length == 0) {
                     this.currentProcess = undefined;
-                    // this.currentProcess = this.readyQueue.shift();
-                    // ahihi[count]?.push(this.currentProcess?.ID);
-                    // ahihi[count]?.push(time);
                     continue;
                 }
             }
@@ -273,9 +267,6 @@ class Scheduler {
 
                 if (this.currentProcess.Tasks.length == 0) {
                     this.currentProcess = undefined;
-                    // this.currentProcess = this.readyQueue.shift();
-                    // ahihi[count]?.push(this.currentProcess?.ID);
-                    // ahihi[count]?.push(time);
                     continue;
                 }
             }
@@ -323,6 +314,6 @@ let p3 = new Process('P3', 2, tasks3);
 let p4 = new Process('P4', 3, tasks4);
 let s = new Scheduler();
 // console.log(s);
-s.SRTF([p, p2, p3, p4]);
+s.FCFS([p, p2, p3, p4]);
 
 

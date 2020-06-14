@@ -64,9 +64,6 @@ class Scheduler {
                 }
                 if (this.currentProcess.Tasks.length == 0) {
                     this.currentProcess = undefined;
-                    // this.currentProcess = this.readyQueue.shift();
-                    // ahihi[count]?.push(this.currentProcess?.ID);
-                    // ahihi[count]?.push(time);
                     continue;
                 }
             }
@@ -95,6 +92,7 @@ class Scheduler {
             return 0;
         });
         ahihi = ahihi.filter(x => x.length != 0);
+        console.log(ahihi);
         return ahihi;
     }
     SJF(Processes) {
@@ -137,9 +135,6 @@ class Scheduler {
                 }
                 if (this.currentProcess.Tasks.length == 0) {
                     this.currentProcess = undefined;
-                    // this.currentProcess = this.readyQueue.shift();
-                    // ahihi[count]?.push(this.currentProcess?.ID);
-                    // ahihi[count]?.push(time);
                     continue;
                 }
             }
@@ -207,7 +202,6 @@ class Scheduler {
                     count++;
                     (_k = ahihi[count]) === null || _k === void 0 ? void 0 : _k.push(this.currentProcess.ID);
                     (_l = ahihi[count]) === null || _l === void 0 ? void 0 : _l.push(time);
-                    // count++;
                 }
                 if (((_o = (_m = this.currentProcess) === null || _m === void 0 ? void 0 : _m.Tasks[0]) === null || _o === void 0 ? void 0 : _o.Duration) > 0) {
                     this.currentProcess.Tasks[0].Duration--;
@@ -219,9 +213,6 @@ class Scheduler {
                 }
                 if (this.currentProcess.Tasks.length == 0) {
                     this.currentProcess = undefined;
-                    // this.currentProcess = this.readyQueue.shift();
-                    // ahihi[count]?.push(this.currentProcess?.ID);
-                    // ahihi[count]?.push(time);
                     continue;
                 }
             }
@@ -254,14 +245,4 @@ class Scheduler {
         return ahihi;
     }
 }
-let tasks = [{ Duration: 8, Type: 'CPU' }];
-let tasks2 = [{ Duration: 4, Type: 'CPU' }];
-let tasks3 = [{ Duration: 9, Type: 'CPU' }];
-let tasks4 = [{ Duration: 5, Type: 'CPU' }];
-let p = new Process('P1', 0, tasks);
-let p2 = new Process('P2', 1, tasks2);
-let p3 = new Process('P3', 2, tasks3);
-let p4 = new Process('P4', 3, tasks4);
-let s = new Scheduler();
-// console.log(s);
-s.SRTF([p, p2, p3, p4]);
+
