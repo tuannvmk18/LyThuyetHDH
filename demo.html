@@ -8,7 +8,7 @@
 </head>
 
 <body>
-    <div id="timeline" style="height: 100%;"></div>
+    <div id="timeline" style="height: 100%; width: auto;"></div>
 
     <script src="main.js"></script>
     <script>
@@ -18,7 +18,7 @@
         var p3 = new Process('P3', 2, [{Duration: 9,Type: 'CPU'}]);
         var p4 = new Process('P4', 3, [{Duration: 5,Type: 'CPU'}]);
         var s = new Scheduler();
-        s.FCFS([p, p2, p3, p4]);
+        s.SRTF([p, p2, p3, p4]);
     </script>
 </body>
 
