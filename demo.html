@@ -18,7 +18,7 @@
         var p3 = new Process('P3', 2, [{Duration: 9,Type: 'CPU'}]);
         var p4 = new Process('P4', 3, [{Duration: 5,Type: 'CPU'}]);
         var s = new Scheduler();
-        s.SRTF([p, p2, p3, p4]);
+        s.RR([p, p2, p3, p4], 2);
     </script>
 </body>
 
